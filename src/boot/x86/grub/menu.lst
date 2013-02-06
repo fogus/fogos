@@ -1,0 +1,15 @@
+# boot the first entry by default
+# default 0
+# if there's a problem booting the default entry, boot the second entry
+# fallback 1
+# boot default after 30 sec
+# timeout 30
+
+title   FogOS
+        root    (fd0)
+        kernel  /fogos.x
+
+title   Boot from C: drive
+        root    (hd0,1)
+        makeactive
+        chainloader +1

@@ -1,0 +1,50 @@
+================================================================
+MAKING A BOOTABLE FLOPPY DISK WITH THE GRUB BOOTLOADER ON IT
+================================================================
+GRUB is a GPLed bootloader.
+
+Home page:      http://www.gnu.org/software/grub
+Binaries:       ftp://alpha.gnu.org/gnu/grub/grub-0.90-i386-pc.tar.gz
+Source code:    ftp://alpha.gnu.org/gnu/grub/grub-0.90.tar.gz
+HOW-TOs:        http://www.washingdishes.freeuk.com/grubtut.html
+                http://www.execpc.com/~geezer/osd/boot/grub-how.txt
+
+1. You will need
+   - Two 1.44 meg floppy disks, one of them formatted with a
+     filesystem that GRUB recognizes (e.g. FAT12 or ext2).
+     The other floppy (the "unformatted" floppy) may contain
+     a filesystem, but it will be destroyed.
+   - The GRUB binaries: files "stage1" and "stage2". These are
+     in the OSD distribution, in the directory "boot/grub".
+   - A "menu.lst" configuration file for GRUB. Again, this
+     is provided with OSD in the "boot/grub" directory.
+
+2. On the formatted floppy disk, create the subdirectory
+   "/boot/grub/", and copy the files "stage1", "stage2", and
+   "menu.lst" into this subdirectory.
+
+3. Concatenate the binary files "stage1" and "stage2" into a
+   single binary file named "boot":
+	(DOS/Windows):  copy /b stage1 + stage2 boot
+	(Linux):        cat stage1 stage2 >boot
+
+4. Write the file "boot" directly to the unformatted floppy.
+   This is a sector-level write that does not use (and will
+   destroy) any filesystem present on the disk:
+	(DOS/Windows):  partcopy boot 0 168000 -f0
+	(Linux):        cat boot >/dev/fd0
+
+   PARTCOPY will display an error message because "boot" is
+   much shorter than 0x168000 bytes, but this is OK.
+
+5. Boot your PC from the unformatted floppy disk.
+
+6. After GRUB has started, eject the unformatted floppy and
+   insert the formatted floppy, containing the "stage1",
+   "stage2", and "menu.lst" files, all in the "/boot/grub/"
+   subdirectory. Type:
+	setup (fd0)
+
+7. The formatted floppy is now bootable. Do not move, modify,
+   or delete the file "/boot/grub/stage2" on this floppy.
+
