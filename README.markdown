@@ -1,5 +1,7 @@
 # fogOS - The seeds of an OS
 
+    make clean
+	make
     make run
 
 TODO: 
