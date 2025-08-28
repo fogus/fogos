@@ -9,7 +9,7 @@
 #define X86				1
 #define AMD64			0
 
-#define GADFLY_VERSION	"0.00c1"
+#define GADFLY_VERSION	"0.00c5-20250828"
 
 typedef unsigned long ulong_t;
 typedef unsigned int uint_t;
