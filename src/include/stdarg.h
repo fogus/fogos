@@ -26,6 +26,6 @@
 // typedefs:
 typedef unsigned char *va_list;
 
-#endif
+//#endif
 
 // End of stdarg.h
